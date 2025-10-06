@@ -1,6 +1,6 @@
 {
-  "title": "Chainguard tutorial",
-  "description": "Build a container from scratch",
+  "title": "Port-forwarding in Docker",
+  "description": "Open ports in Docker containers",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -9,17 +9,17 @@
     },
     "steps": [
       {
-        "title": "Build a container from scratch",
+        "title": "Publish port",
         "text": "step1/text.md",
         "verify": "step1/verify.sh"
       },
       {
-        "title": "Push image to registry",
+        "title": "Publish port on host IP",
         "text": "step2/text.md",
         "verify": "step2/verify.sh"
       },
       {
-        "title": "Push image with custom tag to registry",
+        "title": "Make a request from another host",
         "text": "step3/text.md",
         "verify": "step3/verify.sh"
       }
@@ -34,6 +34,6 @@
     }
   },
   "backend": {
-    "imageid": "ubuntu"
+    "imageid": "kubernetes-kubeadm-2nodes"
   }
 }

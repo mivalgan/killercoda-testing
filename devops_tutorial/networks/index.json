@@ -1,6 +1,6 @@
 {
-  "title": "Chainguard tutorial",
-  "description": "Build a container from scratch",
+  "title": "Network drivers",
+  "description": "Run container in different kind of network",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -9,17 +9,17 @@
     },
     "steps": [
       {
-        "title": "Build a container from scratch",
+        "title": "Run containers in default bridge network",
         "text": "step1/text.md",
         "verify": "step1/verify.sh"
       },
       {
-        "title": "Push image to registry",
+        "title": "Run containers in bridge network",
         "text": "step2/text.md",
         "verify": "step2/verify.sh"
       },
       {
-        "title": "Push image with custom tag to registry",
+        "title": "Run containers in host network",
         "text": "step3/text.md",
         "verify": "step3/verify.sh"
       }

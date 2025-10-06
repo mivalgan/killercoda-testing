@@ -1,6 +1,6 @@
 {
-  "title": "Chainguard tutorial",
-  "description": "Build a container from scratch",
+  "title": "Dockerfile best practices",
+  "description": "Write Dockerfile the right way",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -9,19 +9,29 @@
     },
     "steps": [
       {
-        "title": "Build a container from scratch",
+        "title": "Cached layers",
         "text": "step1/text.md",
         "verify": "step1/verify.sh"
       },
       {
-        "title": "Push image to registry",
+        "title": "Multi-stage build",
         "text": "step2/text.md",
         "verify": "step2/verify.sh"
       },
       {
-        "title": "Push image with custom tag to registry",
+        "title": "Build multiple images",
         "text": "step3/text.md",
         "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Build arguments",
+        "text": "step4/text.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Export binaries",
+        "text": "step5/text.md",
+        "verify": "step5/verify.sh"
       }
     ],
     "assets": {
