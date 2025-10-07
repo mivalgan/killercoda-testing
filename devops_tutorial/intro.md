@@ -23,7 +23,7 @@ Docker makes it so that we can develop one app without taking into account where
 ## Structure
 Our pipeline has the following structure:
 
-<img src="intro_pipeline.png">
+<img src="./intro_pipeline.png">
 
 
 # Intended learning outcomes

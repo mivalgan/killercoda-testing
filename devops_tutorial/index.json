@@ -11,28 +11,23 @@
     "steps": [
       {
         "title": "Install all the requirements for the tutorial",
-        "text": "step1/text.md",
-        "verify": "step1/verify.sh"
+        "text": "step1/text.md"
       },
       {
         "title": "Create the Jenkins pipeline",
-        "text": "step2/text.md",
-        "verify": "step2/verify.sh"
+        "text": "step2/text.md"
       },
       {
         "title": "Test the pipeline with insecure base images",
-        "text": "step3/text.md",
-        "verify": "step3/verify.sh"
+        "text": "step3/text.md"
       },
       {
         "title": "Modify the Dockerfile",
-        "text": "step4/text.md",
-        "verify": "step4/verify.sh"
+        "text": "step4/text.md"
       },
       {
         "title": "Test the pipeline with secure base images",
-        "text": "step5/text.md",
-        "verify": "step5/verify.sh"
+        "text": "step5/text.md"
       },
       {
         "title": "Conclusion",
