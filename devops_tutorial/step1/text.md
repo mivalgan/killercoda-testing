@@ -63,7 +63,7 @@ Once you have Java installed, you can install the Long Term Service release of J
 `sudo apt install jenkins`{{exec}}
 
 <br>
-<details><summary>Bugs bunny</summary>
+<details><summary>CLICK ME!</summary>
 <br>
 
 ```plain
