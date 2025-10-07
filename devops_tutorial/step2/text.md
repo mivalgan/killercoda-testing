@@ -2,59 +2,58 @@ Now that we have Docker and Jenkins installed, we can create a Jenkins pipeline 
 
 ## Download Node.js app
 First, clone the repository that contains the sample Node.js application with the following command:
-```bash
-git clone https://github.com/Ferran32/executable-tutorial.git /root/demo
-```
+
+`git clone https://github.com/Ferran32/executable-tutorial.git /root/demo`{{exec}}
+
 This application is a simple web server that fetches random jokes from an external API and displays them on a web page. The application listens on port 3000.
 
 
 Then, navigate to the demo directory:
-```bash
-cd /root/demo
-```
+
+`cd /root/demo`{{exec}}
 
 Now we also need to install Node.js and npm to be able to run the application. We can do this with the following commands:
 
 **Download and install nvm:**
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-```
+
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`{{exec}}
+
 **in lieu of restarting the shell:**
-```bash
-\. "$HOME/.nvm/nvm.sh"
-```
+
+`\. "$HOME/.nvm/nvm.sh"`{{exec}}
+
 **Download and install Node.js:**
-```bash
-nvm install 22
-```
+
+`nvm install 22`{{exec}}
+
 **Verify the Node.js version:**
-```bash
-node -v
-```
+
+`node -v`{{exec}}
+
 **Verify npm version:**
-```bash
-npm -v
-```
+
+`npm -v`{{exec}}
+
 
 Now we can install the dependencies of the application with:
-```bash
-npm install express axios ejs
-```
+
+`npm install express axios ejs`{{exec}}
+
 Now, before jumping to creating the Jenkinsfile, let's create a simple Dockerfile that will be used to build the Docker image of the application. Move to the parent directory:
-```bash
-cd ..
-```
+
+`cd ..`{{exec}}
+
 
 ## Create the Dockerfile
 Now that we have the Jenkinsfile, we also need a Dockerfile to build the Docker image. Create a file named 'Dockerfile' with the following command:
-```bash
-touch Dockerfile
-```
+
+`touch Dockerfile`{{exec}}
+
 
 Then, open the file with a text editor, such as 'nano':
-```bash
-nano Dockerfile
-```
+
+`nano Dockerfile`{{exec}}
+
 
 Copy the following contents into the file:
 ```Dockerfile
@@ -82,14 +81,14 @@ Save the file and exit the text editor (in nano, `CTRL + O` + `ENTER` + `CTRL + 
 
 ## Jenkinsfile
 Create a file named 'Jenkinsfile' with the following command:
-```bash
-touch Jenkinsfile
-```
+
+`touch Jenkinsfile`{{exec}}
+
 
 Then, open the file with a text editor, such as 'nano':
-```bash
-nano Jenkinsfile
-```
+
+`nano Jenkinsfile`{{exec}}
+
 
 Copy the following contents into the file:
 ```groovy

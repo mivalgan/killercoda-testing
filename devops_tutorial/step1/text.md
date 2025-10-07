@@ -1,17 +1,4 @@
 ## Docker
-<<<<<<< HEAD
-
-First of all we will need to install Docker. The following commands will install the latest version of Docker on an Ubuntu system.
-
-```bash
-# Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-=======
->>>>>>> 9ac5e0aab7a7012d5a8a7d2f040e665280c60c8d
 
 Add Docker's official GPG key:
 
@@ -76,7 +63,7 @@ Once you have Java installed, you can install the Long Term Service release of J
 `sudo apt install jenkins`{{exec}}
 
 <br>
-<details><summary>Bugs bunny</summary>
+<details><summary>CLICK ME!</summary>
 <br>
 
 ```plain
