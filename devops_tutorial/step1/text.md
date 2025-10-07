@@ -2,13 +2,11 @@
 
 Add Docker's official GPG key:
 
-```plain
-sudo apt-get update
+`sudo apt-get update`{{exec}}
 
-sudo apt-get install ca-certificates curl
+`sudo apt-get install ca-certificates curl`{{exec}}
 
-sudo install -m 0755 -d /etc/apt/keyrings
-```{{exec}}
+`sudo install -m 0755 -d /etc/apt/keyrings`{{exec}}
 
 `sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc`{{exec}}
 
