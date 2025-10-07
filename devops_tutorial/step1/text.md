@@ -1,4 +1,7 @@
 ## Docker
+
+First of all we will need to install Docker. The following commands will install the latest version of Docker on an Ubuntu system.
+
 ```bash
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -38,11 +41,13 @@ sudo systemctl start docker
 
 ## Jenkins
 To install Jenkins we first need to install Java. That can be done with the following commands:
+
 ```bash
 sudo apt update
 sudo apt install fontconfig openjdk-21-jre
 java -version
 ```
+
 Once you have Java installed, you can install the Long Term Service release of Jenkins with the following commands:
 ```bash
 sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
@@ -52,4 +57,9 @@ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt update
 sudo apt install jenkins
+```
+
+Once the installation is complete, you can check the status of the Jenkins service with:
+```bash
+sudo systemctl status jenkins
 ```
