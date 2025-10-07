@@ -1,27 +1,42 @@
 {
   "title": "Chainguard tutorial",
-  "description": "Build a container from scratch",
+  "description": "Ensure secure base images using Chainguard images",
   "details": {
     "intro": {
       "text": "intro.md",
+      "title": "Introduction",
       "background": "init/background.sh",
       "foreground": "init/foreground.sh"
     },
     "steps": [
       {
-        "title": "Build a container from scratch",
+        "title": "Install all the requirements for the tutorial",
         "text": "step1/text.md",
         "verify": "step1/verify.sh"
       },
       {
-        "title": "Push image to registry",
+        "title": "Create the Jenkins pipeline",
         "text": "step2/text.md",
         "verify": "step2/verify.sh"
       },
       {
-        "title": "Push image with custom tag to registry",
+        "title": "Test the pipeline with insecure base images",
         "text": "step3/text.md",
         "verify": "step3/verify.sh"
+      },
+      {
+        "title": "Modify the Dockerfile",
+        "text": "step4/text.md",
+        "verify": "step4/verify.sh"
+      },
+      {
+        "title": "Test the pipeline with secure base images",
+        "text": "step5/text.md",
+        "verify": "step5/verify.sh"
+      },
+      {
+        "title": "Conclusion",
+        "text": "conclusion/text.md"
       }
     ],
     "assets": {
