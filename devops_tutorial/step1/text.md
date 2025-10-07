@@ -39,13 +39,15 @@ Note: If the status command shows that the service is not running, you can start
 
 `sudo systemctl start docker`{{exec}}
 
+If the previous command fails just wait for a bit and try to reexecute.
+
 
 ## Jenkins
 To install Jenkins we first need to install Java. That can be done with the following commands:
 
 `sudo apt update`{{exec}}
 
-`sudo apt install fontconfig openjdk-21-jre`{{exec}}
+`sudo apt install fontconfig openjdk-21-jre -y`{{exec}}
 
 `java -version`{{exec}}
 
