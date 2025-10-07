@@ -65,7 +65,7 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json first (for better caching)
 COPY demo/package*.json ./
 
-# Install dependencies
+# Install dependencies (axios, express, ejs)
 RUN npm install --production
 
 # Copy the rest of the app source code
