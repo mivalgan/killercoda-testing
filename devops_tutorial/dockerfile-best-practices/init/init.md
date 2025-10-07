@@ -1,1 +1,0 @@
-Overview of best practices for writing Dockerfiles

@@ -1,1 +1,0 @@
-Run updated version of the image.

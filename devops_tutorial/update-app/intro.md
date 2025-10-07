@@ -1,1 +1,0 @@
-Update containerized application.
