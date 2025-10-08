@@ -2,7 +2,9 @@ Now that we have our application, Dockerfile, and Jenkinsfile ready, let's creat
 
 **1- Start the Jenkins process:**
 
-`jenkins &>/var/log/jenkins.log &`{{exec}}
+`jenkins --httpPort=9090 &>/var/log/jenkins.log &`{{exec}}
+
+We are using a different port (9090) to avoid conflicts with existing port listeners used by the Killercoda platform.
 
 Wait a bit for Jenkins to start, then check the log file to see when it's ready:
 
@@ -14,27 +16,31 @@ INFO: Jenkins is fully up and running
 ```
 
 **2- Get the CLI jar file:**
-`wget http://localhost:8080/jnlpJars/jenkins-cli.jar`{{exec}}
-
-**3- Get the initial admin token:**
-`cat /var/lib/jenkins/users/admin_*/config.xml`{{exec}}
-
-Look for the line that contains `<passwordHash>`, it should look something like this:
-```plain
-<passwordHash>#jbcrypt:$2a$10$...</passwordHash>
-```
-
-Copy the entire hash (the part after `#jbcrypt:`) as you'll need it to authenticate with the Jenkins CLI.
-
-Run the following commands to set up the environment variables for the Jenkins CLI:
-`export JENKINS_USER=admin`{{exec}}
-`export JENKINS_TOKEN=<your_password_hash_here>`{{exec}}
+`wget http://localhost:9090/jnlpJars/jenkins-cli.jar`{{exec}}
 
 For simplicity you can set an alias for the Jenkins CLI command:
-`alias jenkins-cli='java -jar /root/jenkins-cli.jar -s http://localhost:8080/'`{{exec}}
+`alias jenkins-cli='java -jar /root/jenkins-cli.jar -s http://localhost:9090/ -http'`{{exec}}
 The '-s' flag specifies that Jenkins should wait until the action is complete before exiting, thus allowing us to see the full output of the command and avoid timing issues.
 
 From now on, this tutorial assumes that you have set the alias for the Jenkins CLI command.
+
+**3- Authentication:**
+In this step, we should authenticate to Jenkins, using the initial admin password. You can find the password in the log file:
+`cat /var/lib/jenkins/secrets/initialAdminPassword`{{exec}}
+
+This password is needed to perform the initial access and setup of Jenkins, in their GUI. However, since we are using the CLI, we cannot use this password directly, therefore, since this is a demo , we will disable the security temporarily to be able to create the pipeline. To do this we can run the following command:
+
+`sudo sed -i 's#<useSecurity>true</useSecurity>#<useSecurity>false</useSecurity>#' /var/lib/jenkins/config.xml`{{exec}}
+
+You can check that the security is disabled by running:
+`grep useSecurity /var/lib/jenkins/config.xml`{{exec}}
+
+Now restart the Jenkins service to apply the changes:
+`sudo systemctl restart jenkins`{{exec}}
+
+Check that the service is running with:
+`sudo systemctl status jenkins`{{exec}}
+
 
 **4- Create the pipeline:**
 First, create a new pipeline job named 'secure-base-image-pipeline' with the following command:
