@@ -153,7 +153,7 @@ pipeline {
                     fi
                     """
                     // Start new container
-                    sh "docker run -d --name ${APP_NAME} -p 8080:8080 ${APP_NAME}:${IMAGE_TAG}"
+                    sh "docker run -d --name ${APP_NAME} -p 9090:9090 ${APP_NAME}:${IMAGE_TAG}"
                     echo "🚀 Deployment successful: ${APP_NAME}:${IMAGE_TAG} is running."
                 }
             }
