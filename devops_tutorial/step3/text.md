@@ -18,7 +18,7 @@ The '-s' flag specifies that Jenkins should wait until the action is complete be
 
 From now on, this tutorial assumes that you have set the alias for the Jenkins CLI command.
 
-**2.5- Disable authentication:**
+**3- Disable authentication:**
 
 According to documentation, to disable the authentication we must edit the config.xml file located in /var/lib/jenkins/config.xml. First, we need to stop the Jenkins service with:
 `sudo systemctl stop jenkins`{{exec}}
@@ -44,11 +44,6 @@ instance.save()
 EOF
 ```
 
-And now let's manually run Jenkins to avoid getting the configuration overwritten when restarting the service:
-`java -jar /usr/share/java/jenkins.war --httpPort=8080 &`{{exec}}
-
-This command will start Jenkins in the background and you should see the logs in the terminal. Wait until you see the line that says "Jenkins is fully up and running".
-
 Now we need to disable the CSRF protection to be able to use the CLI without issues. To do this, we can run the following commands:
 ```bash
 sudo tee /var/lib/jenkins/init.groovy.d/disable_crumbs.groovy > /dev/null <<'EOF'
@@ -61,8 +56,14 @@ instance.save()
 println "CSRF protection disabled for automation."
 EOF
 ```
-And restart Jenkins manually again to apply the changes:
-`pkill -f jenkins.war && java -jar /usr/share/java/jenkins.war --httpPort=8080 &`{{exec}}
+
+Now make sure to set the JENKINS_HOME environment variable to /var/lib/jenkins:
+`export JENKINS_HOME=/var/lib/jenkins`{{exec}}
+
+And now let's manually run Jenkins to avoid getting the configuration overwritten when restarting the service:
+`java -jar /usr/share/java/jenkins.war --httpPort=8080 &`{{exec}}
+
+This command will start Jenkins in the background and you should see the logs in the terminal. Wait until you see the line that says "Jenkins is fully up and running".
 
 Now let's get the API Token for the admin user we just created, create a script file with:
 `nano get_api_token.sh`{{exec}}
