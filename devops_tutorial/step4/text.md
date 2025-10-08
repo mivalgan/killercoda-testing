@@ -15,9 +15,10 @@ WORKDIR /usr/src/app
 COPY demo/package*.json ./
 RUN npm install axios express ejs
 COPY ./demo .
-# Drop privileges back
-USER nonroot
-CMD ["node", "demo/server.js"]
+CMD ["node", "server.js"]
 
 ```
 Save the file and exit the text editor (in nano, `CTRL + O` + `ENTER` + `CTRL + X`).
+
+We also need to copy the Dockerfile to the corresponding directory, so that Jenkins can access it. We can do this with the following command:
+`cp Dockerfile /var/lib/jenkins/workspace/secure-base-image-pipeline/Dockerfile`{{exec}}
