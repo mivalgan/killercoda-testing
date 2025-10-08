@@ -1,14 +1,8 @@
 Now that we have our application, Dockerfile, and Jenkinsfile ready, let's create the Jenkins pipeline to automate the build and push process. Since we don't have access to the Jenkins UI in this environment, we'll create the pipeline using the Jenkins CLI.
 
 **1- Start the Jenkins process:**
-
-`jenkins --httpPort=9090 &>/var/log/jenkins.log &`{{exec}}
-
-We are using a different port (9090) to avoid conflicts with existing port listeners used by the Killercoda platform.
-
-Wait a bit for Jenkins to start, then check the log file to see when it's ready:
-
-`tail -f /var/log/jenkins.log`{{exec}}
+To check that Jenkins is running, you can use the following command:
+`sudo systemctl status jenkins`{{exec}}
 
 You should see a line like this when it's ready:
 ```plain
@@ -16,15 +10,15 @@ INFO: Jenkins is fully up and running
 ```
 
 **2- Get the CLI jar file:**
-`wget http://localhost:9090/jnlpJars/jenkins-cli.jar`{{exec}}
+`wget http://localhost:8080/jnlpJars/jenkins-cli.jar`{{exec}}
 
 For simplicity you can set an alias for the Jenkins CLI command:
-`alias jenkins-cli='java -jar /root/jenkins-cli.jar -s http://localhost:9090/ -http'`{{exec}}
+`alias jenkins-cli='java -jar /root/jenkins-cli.jar -s http://localhost:8080/ -http'`{{exec}}
 The '-s' flag specifies that Jenkins should wait until the action is complete before exiting, thus allowing us to see the full output of the command and avoid timing issues.
 
 From now on, this tutorial assumes that you have set the alias for the Jenkins CLI command.
 
-**3- Authentication:**
+**3- Authentication: Falta por terminar** 
 In this step, we should authenticate to Jenkins, using the initial admin password. You can find the password in the log file:
 `cat /var/lib/jenkins/secrets/initialAdminPassword`{{exec}}
 

@@ -1,5 +1,9 @@
 ## Docker
 
+Docker is already installed in the environment, but if you want to install it in your own machine, you can follow these steps:
+
+### Install Docker Engine (optional)
+
 Add Docker's official GPG key:
 
 `sudo apt-get update`{{exec}}
