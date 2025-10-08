@@ -15,8 +15,7 @@ WORKDIR /usr/src/app
 COPY demo/package*.json ./
 RUN npm install axios express ejs
 COPY ./demo .
-CMD ["node", "server.js"]
-
+ENTRYPOINT ["node", "server.js"]
 ```
 Save the file and exit the text editor (in nano, `CTRL + O` + `ENTER` + `CTRL + X`).
 
