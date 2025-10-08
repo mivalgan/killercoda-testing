@@ -188,7 +188,7 @@ pipeline {
 
 
 Then, we can create a new pipeline job named 'secure-base-image-pipeline' with the following command:
-`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN create-job secure-base-image-pipeline < Jenkinsfile`{{exec}}
+`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN create-job secure-base-image-pipeline < pipeline.xml`{{exec}}
 This command creates a new Jenkins job using the configuration defined in the Jenkinsfile.
 
 **5- Run the pipeline:**
