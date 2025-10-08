@@ -66,7 +66,7 @@ WORKDIR /usr/src/app
 COPY demo/package*.json ./
 
 # Install dependencies (axios, express, ejs)
-RUN npm install --production
+RUN npm install axios express ejs
 
 # Copy the rest of the app source code
 COPY ./demo .

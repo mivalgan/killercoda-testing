@@ -7,8 +7,17 @@ For that we do:
 
 `nano Dockerfile`{{exec}}
 
-And replace the first line (FROM node:18-alpine) with the following line:
+And replace the contents of the Dockerfile to the following ones:
 ```Dockerfile
-FROM cgr.dev/chainguard/node
+FROM cgr.dev/chainguard/node:latest
+USER root
+WORKDIR /usr/src/app
+COPY demo/package*.json ./
+RUN npm install axios express ejs
+COPY ./demo .
+# Drop privileges back
+USER nonroot
+CMD ["node", "demo/server.js"]
+
 ```
 Save the file and exit the text editor (in nano, `CTRL + O` + `ENTER` + `CTRL + X`).
