@@ -7,8 +7,7 @@ For that we do:
 
 `nano Dockerfile`{{exec}}
 
-And change the first line to:
-Copy the following contents into the file:
+And replace the first line (FROM node:18-alpine) with the following line:
 ```Dockerfile
 FROM cgr.dev/chainguard/node
 ```

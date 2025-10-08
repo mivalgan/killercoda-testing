@@ -191,15 +191,25 @@ Then, we can create a new pipeline job named 'secure-base-image-pipeline' with t
 `jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN create-job secure-base-image-pipeline < pipeline.xml`{{exec}}
 This command creates a new Jenkins job using the configuration defined in the Jenkinsfile.
 
-**5- Run the pipeline:**
-Now that we have created the pipeline job, we can run it and test our Dockerfile with the command below:
+**5- Prepare the workspace:**
+Now we need to make sure that the Jenkins workspace has the necessary files (Dockerfile and app files) to run the pipeline. We can do this by copying the files to the Jenkins workspace directory:
+`sudo mkdir -p /var/lib/jenkins/workspace/secure-base-image-pipeline`{{exec}}
+`cp Dockerfile /var/lib/jenkins/workspace/secure-base-image-pipeline/`{{exec}}
+`cp -r demo /var/lib/jenkins/workspace/secure-base-image-pipeline/`{{exec}}
+
+And also let's change the ownership of the files to the jenkins user:
+`sudo chown -R jenkins:jenkins /var/lib/jenkins/workspace/secure-base-image-pipeline`{{exec}}
+
+
+**6- Run the pipeline:**
+Now that we have created the pipeline job and prepared the workspace, we can run it and test our Dockerfile with the command below:
 `jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN build secure-base-image-pipeline -f`{{exec}}
 This command triggers the execution of the pipeline job we just created. The `-f` follows the live build of the pipeline, thus allowing us to see at which step the pipeline is in every moment.
 
 You should see that the pipeline fails to run, since we are using an insecure base image. The pipeline should fail at the step where it checks for secure base images. We will fix this in the next step.
 
-**6- Check the logs after the execution: (optional)**
+**7- Check the logs after the execution: (optional)**
 In case you want to check the logs of the pipeline execution, you can do so with the following command:
-`jenkins-cli console secure-base-image-pipeline`{{exec}}
+`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN console secure-base-image-pipeline`{{exec}}
 
 Documentation for the Jenkins CLI can be found [here](https://www.jenkins.io/doc/book/managing/cli/).

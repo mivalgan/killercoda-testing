@@ -3,7 +3,7 @@ After changing this the Chainguard check should be correct and our app should be
 
 We can verify this by doing
 
-`jenkins-cli build secure-base-image-pipeline -f`{{exec}}
+`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN build secure-base-image-pipeline -f`{{exec}}
 
 And we verify that the app runs smoothly.
 
