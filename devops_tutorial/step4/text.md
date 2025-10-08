@@ -1,22 +1,15 @@
+# Correcting the container
 
-Without specifying a `:tag`, the default `:latest` will be used. Now we want to use tag `:v1` instead.
+As we saw in the previous point, our application did not pass Chainguard tests.
+This is due to the container not being an official Chainguard container that is guaranteed to be the safest version. So if we want to fix this we need to change the container that we are using to an official image from chainguard.
+This can be done by configuring the Dockerfile correctly.
+For that we do:
 
-Tag the image, which is currently tagged as `pinger`, also as `pinger:v1` and `local-registry:5000/pinger:v1`.
+`nano Dockerfile`{{exec}}
 
-Then push the image into the local registry.
-
-<br>
-<details><summary>Solution</summary>
-<br>
-
-```plain
-docker tag pinger pinger:v1
-
-docker tag pinger local-registry:5000/pinger:v1
-
-docker image ls
-
-docker push local-registry:5000/pinger:v1
-```{{exec}}
-
-</details>
+And change the first line to:
+Copy the following contents into the file:
+```Dockerfile
+FROM cgr.dev/chainguard/node
+```
+Save the file and exit the text editor (in nano, `CTRL + O` + `ENTER` + `CTRL + X`).
