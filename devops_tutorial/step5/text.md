@@ -10,3 +10,11 @@ And we verify that the app runs smoothly.
 To be sure that the container is running we could access the website URL, but since we do not have acces to a GUI we can see the running processes instead.
 
 `docker ps -a`{{exec}}
+
+And we can also get the index for the website!!!
+
+`wget http://localhost:3000`{{exec}}
+
+
+# Conclusions
+This concludes our tutorial, now you should be able to deploy securely with Chainguard!
