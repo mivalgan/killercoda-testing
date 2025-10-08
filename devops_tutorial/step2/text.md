@@ -154,7 +154,7 @@ pipeline {
                     """
                     // Start new container
                     sh "docker run -d --name ${APP_NAME} -p 3000:3000 ${APP_NAME}:${IMAGE_TAG}"
-                    echo "🚀 Deployment successful: ${APP_NAME}:${IMAGE_TAG} is running."
+                    echo "Deployment successful: ${APP_NAME}:${IMAGE_TAG} is running."
                 }
             }
         }

@@ -91,7 +91,103 @@ Now set the JENKINS_USER and JENKINS_API_TOKEN environment variables with the fo
 `export JENKINS_API_TOKEN=<your_token>`
 
 **4- Create the pipeline:**
-First, create a new pipeline job named 'secure-base-image-pipeline' with the following command:
+First, we need to get the necessary pluggins for the pipeline to work. We can do this with the following commands:
+`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN -s http://localhost:8080/ install-plugin workflow-aggregator workflow-job workflow-cps git docker-workflow`{{exec}}
+
+Now we need to create a pipeline.xml file, so that Jenkins understands the file format of the pipeline we want to create. Create the file with:
+`nano pipeline.xml`{{exec}}
+And copy the following contents into the file:
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job">
+  <description>Pipeline that ensures Docker base images are from Chainguard</description>
+  <keepDependencies>false</keepDependencies>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
+    <script>
+<![CDATA[
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "jokes-app"
+        IMAGE_TAG = "latest"
+    }
+
+    stages {
+        stage('Check Base Image') {
+            steps {
+                script {
+                    echo "Checking Dockerfile for secure base images"
+                    def dockerfile = readFile('Dockerfile')
+                    def fromLines = dockerfile.readLines().findAll { it.trim().startsWith('FROM') }
+
+                    if (fromLines.isEmpty()) {
+                        error("Error: No Docker Images found in the Dockerfile.")
+                    }
+
+                    def invalidImages = []
+                    fromLines.each { line ->
+                        def image = line.tokenize(' ')[1]
+                        echo "Detected base image: ${image}"
+                        if (!image.startsWith('cgr.dev/chainguard')) {
+                            invalidImages.add(image)
+                        }
+                    }
+
+                    if (!invalidImages.isEmpty()) {
+                        error("Error: Insecure base images detected: ${invalidImages.join(', ')}. Please use Chainguard base images.")
+                    }
+
+                    echo "Dockerfile validated: using secure Chainguard base images"
+                }
+            }
+        }
+
+        stage('Build Container') {
+            steps {
+                script {
+                    echo "Building Docker image ${APP_NAME}:${IMAGE_TAG}"
+                    sh "docker build -t ${APP_NAME}:${IMAGE_TAG} ."
+                }
+            }
+        }
+
+        stage('Replace Running Container') {
+            steps {
+                script {
+                    echo "Replacing existing container with newer version"
+                    sh '''
+                    if [ $(docker ps -q -f name=${APP_NAME}) ]; then
+                        docker stop ${APP_NAME}
+                        docker rm ${APP_NAME}
+                    fi
+                    '''
+                    sh "docker run -d --name ${APP_NAME} -p 3000:3000 ${APP_NAME}:${IMAGE_TAG}"
+                    echo "🚀 Deployment successful: ${APP_NAME}:${IMAGE_TAG} is running."
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Pipeline failed: App deployment stopped."
+        }
+        success {
+            echo "Pipeline completed successfully: Container has been deployed."
+        }
+    }
+}
+]]>
+    </script>
+    <sandbox>true</sandbox>
+  </definition>
+  <disabled>false</disabled>
+</flow-definition>
+```
+
+
+Then, we can create a new pipeline job named 'secure-base-image-pipeline' with the following command:
 `jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN create-job secure-base-image-pipeline < Jenkinsfile`{{exec}}
 This command creates a new Jenkins job using the configuration defined in the Jenkinsfile.
 
