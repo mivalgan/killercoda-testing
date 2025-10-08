@@ -1,22 +1,14 @@
+## Verify that the application runs
+After changing this the Chainguard check should be correct and our app should be able to run.
 
-Without specifying a `:tag`, the default `:latest` will be used. Now we want to use tag `:v1` instead.
+We can verify this by doing
 
-Tag the image, which is currently tagged as `pinger`, also as `pinger:v1` and `local-registry:5000/pinger:v1`.
+`jenkins-cli build secure-base-image-pipeline -f`{{exec}}
 
-Then push the image into the local registry.
+And we verify that the app runs smoothly.
 
-<br>
-<details><summary>Solution</summary>
-<br>
+To be sure that the container is running we could access the website URL, but since we do not have acces to a GUI we can see the running processes instead.
 
-```plain
-docker tag pinger pinger:v1
+`ps aux | grep docker`{{exec}}
 
-docker tag pinger local-registry:5000/pinger:v1
-
-docker image ls
-
-docker push local-registry:5000/pinger:v1
-```{{exec}}
-
-</details>
+`docker ps`{{exec}}
