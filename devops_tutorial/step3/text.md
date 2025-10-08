@@ -94,6 +94,9 @@ Now set the JENKINS_USER and JENKINS_API_TOKEN environment variables with the fo
 First, we need to get the necessary pluggins for the pipeline to work. We can do this with the following commands:
 `jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN -s http://localhost:8080/ install-plugin workflow-aggregator workflow-job workflow-cps git docker-workflow`{{exec}}
 
+After installing the plugins, we need to restart Jenkins to apply the changes:
+`jenkins-cli -auth $JENKINS_USER:$JENKINS_API_TOKEN -s http://localhost:8080/ safe-restart`{{exec}}
+
 Now we need to create a pipeline.xml file, so that Jenkins understands the file format of the pipeline we want to create. Create the file with:
 `nano pipeline.xml`{{exec}}
 And copy the following contents into the file:
