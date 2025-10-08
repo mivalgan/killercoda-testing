@@ -9,6 +9,4 @@ And we verify that the app runs smoothly.
 
 To be sure that the container is running we could access the website URL, but since we do not have acces to a GUI we can see the running processes instead.
 
-`ps aux | grep docker`{{exec}}
-
-`docker ps`{{exec}}
+`docker ps -a`{{exec}}
